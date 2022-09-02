@@ -1,0 +1,37 @@
+{%extends 'base.html'%}
+{%block body%}
+{% load bootstrap4 %}
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>+{{job_count}} Jobs Available</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<div class="job_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="apply_job_form white-bg">
+                    <h4>Upload Your Resume</h4>
+                        {% load bootstrap4 %}                
+               <form method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+               {% bootstrap_form form %}
+                {% buttons %}
+               <button type="submit" class="boxed-btn3 w-100">Apply</button>
+               {% endbuttons %}
+             </form>
+                   
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{%endblock body%}

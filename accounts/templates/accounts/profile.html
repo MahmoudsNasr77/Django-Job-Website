@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>{{ job.title }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+    <div class="job_details_area">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-10 mx-auto">
+                    <div class="job_sumary">
+                        <div class="summery_header">
+                            
+                            
+                            {% if profile.image %}
+                                <img class="w-50 mb-10 mx-auto rounded d-block img-thumbnail " src="{{profile.image.url}}" alt="">
+                                {% else %}
+                                <img class="w-50 mb-10 mx-auto rounded d-block img-thumbnail " src="" alt="">
+                                {% endif %}
+                                
+                           
+                         <span class="d-block text-center text-capitalize font-weight-bold">{{profile.user.first_name}} {{profile.user.last_name}}</span>
+                        
+                            
+                        </div>
+                        <div class="job_content">
+                            <ul>           
+                                <li>Username: <span>{{profile.user.username}} </span></li>
+                                <li>Email: <span>{{profile.user.email}}</span></li>
+                             
+                                <li>Joined Date: <span>{{profile.user.date_joined}}</span></li>
+                            </ul>
+                            
+                        </div>
+                        <div class="p-3">
+                            <a href="{% url 'accounts:profile_edit' %}"><button class="btn btn-success boxed-btn3 w-100">Edit Profile</button></a>
+                            
+
+                          
+                         </div>
+                        
+                    </div>
+               
+                            
+                            
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock body %}
+
+   

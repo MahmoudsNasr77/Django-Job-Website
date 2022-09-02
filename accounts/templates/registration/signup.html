@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+{% load bootstrap4 %} 
+{% block content %}
+<h3>Sign Up</h3>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <a href="url 'account:profile'"><input type="submit" value="Sign Up" class="boxed-btn3 w-100"></a>
+  </form>
+
+{% endblock %}

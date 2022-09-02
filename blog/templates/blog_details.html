@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>{{blog_details.title}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="blog_area single-post-area section-padding">
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-8 posts-list">
+             <div class="single-post">
+                <div class="feature-img">
+                  <img src="" alt="">
+                   <img class="img-fluid" src="{{blog_details.image.url}}" alt="">
+                </div>
+                <div class="blog_details">
+                   <h2>{{blog_details.description}}
+                   </h2>
+                   <ul class="blog-info-link mt-3 mb-4">
+                      <li><a href="#"><i class="fa fa-user"></i>{{blog_details.category}}</a></li>
+                      <li><a href="#"><i class="fa fa-comments"></i>{{comment_count}} comment</a></li>
+                   </ul>
+             </div>
+             
+
+             </div>
+             
+             {% for comme in comment %}
+             <div class="comments" style="padding: 10px;">
+               <p class="font-weight-bold">
+                 {{ comme.user.first_name }}
+                 <span class=" text-muted font-weight-normal">
+                   {{ comme.date }}
+                 </span>
+               </p>
+               {{ comme.body | linebreaks }}
+             </div>
+             {% endfor %}
+          </div>
+
+       </div>
+    </div>
+ </section>
+
+
+ <section class="comment-sec-area pt-80 pb-80">
+   <div class="container">
+       <div class="row lex-column">
+           <h5 class="text-uppercase pb-80">{{comment_count }} comment</h5>
+           <br>
+           {%for comm in blog_details.reply.all %}
+           <div class="comment-list">
+               <div class="single-comment justify-content-between d-flex">
+                  
+                 
+                   <div class="user justify-content-between d-flex">
+                       <div class="thumb">
+                        
+                       </div>
+                       <div class="desc">
+                           <h5>{{comm.user.first_name}} {{comm.user.last_name}} </h5>
+                           <p class="date">{{comm.date}} </p>
+                           <p class="comment">
+                               {{comm.comment}}
+                           </p>
+                       </div>
+                   </div>
+                   <div class="reply-btn">
+                          <a href="#comment" class="btn-reply text-uppercase">reply</a> 
+                          
+                   </div>
+               </div>
+           </div>
+           {%endfor%}
+                                                                                                                                                             
+       </div>
+   </div> 
+      
+</section>
+
+<!-- End comment-sec Area -->
+
+<!-- Start commentform Area -->
+<section class="commentform-area pt-80" >
+   <div class="container">
+       <h5 class="pb-50">Leave a Reply</h5>
+      {% load bootstrap4 %}  
+ <form method="post" class="form" enctype="multipart/form-data" id="comment">
+   {% csrf_token %}
+  {% bootstrap_form form %}
+   {% buttons %}
+  <button type="submit" class="boxed-btn3 w-100">Comment</button>
+  
+  {% endbuttons %}
+</form>
+   </div>    
+</section>
+<section class="comment-sec-area pt-80 pb-80">
+    <div class="container">
+    <div class="row">
+        <h3 class="widget_title">Recent Post</h3>
+        <div class='lg-4'>
+            {%for post in recent_post%}
+            <div class="media post_item">
+               <img class="img-thumbnail img-fluid w-25 d-block" src="{{post.image.url}}" alt="post" >
+               <div class="media-body">
+                  <a href="{% url 'blog:blog_details' post.slug %} ">
+                    <br>
+                     <h4 class= "p-2">{{post | truncatechars:20}}</h3>
+                  </a>
+                  <p class="p-2">{{post.publish_at}}</p>
+               </div>
+            </div>
+            {%endfor%}
+        </div>
+       
+
+
+    </div>
+    </div> 
+       
+    </section>
+<!-- End commentform Area -->
+
+ <!--================ Blog Area end =================-->
+{%endblock body%}
